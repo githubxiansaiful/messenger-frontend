@@ -8,3 +8,15 @@ export const axiosInstance = axios.create({
         : "https://kitty-chat-backend-psi.vercel.app/api/", // Live backend URL
     withCredentials: true
 });
+
+// Add an Axios interceptor to automatically attach the token from cookies to the request headers
+axiosInstance.interceptors.request.use((config) => {
+    // Get token from cookies
+    const token = document.cookie.split(';').find(cookie => cookie.trim().startsWith('jwt='));
+    if (token) {
+        config.headers['Authorization'] = `Bearer ${token.split('=')[1]}`;
+    }
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
