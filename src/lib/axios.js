@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-    baseURL: "http://localhost:5002/api/",
+    baseURL: "https://kitty-chat-backend-psi.vercel.app/api/",
     withCredentials: true
 });
